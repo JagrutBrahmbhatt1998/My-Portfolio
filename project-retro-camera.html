@@ -1034,6 +1034,7 @@
             padding: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            text-align: justify;
         }
 
         /* Typography */
@@ -1204,7 +1205,7 @@
         .feature-list {
             list-style: none;
             padding: 0;
-            margin: var(--vspace-1) 0;
+            /* margin: var(--vspace-1) 0; */
         }
 
         .feature-list li {
@@ -1240,7 +1241,7 @@
 
         /* Images */
         .project-image {
-            width: 100%;
+            width: 60%;
             border-radius: 8px;
             margin-bottom: var(--vspace-1);
             border: 1px solid var(--color-border);
@@ -1317,7 +1318,6 @@
             <!-- Project Overview -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🧩</span>
                     PROJECT OVERVIEW
                 </h2>
                 <div class="card">
@@ -1333,7 +1333,6 @@
             <!-- Failure Mode Analysis -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🔍</span>
                     FAILURE MODE & RISK CONTEXT (FMEA-Informed Framing)
                 </h2>
                 <div class="row">
@@ -1377,23 +1376,23 @@
             <!-- Technical Approach -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🧪</span>
+                   
                     TECHNICAL APPROACH
                 </h2>
                 
-                <div class="row">
+                <div class="row" style="margin-bottom: 25px;">
                    <div class="column">
-                <div class="card">
-                    <h4><span class="section-icon">🧮</span> FATIGUE ANALYSIS</h4>
+                <div class="card" style="height: 100%;">
+                    <h4> FATIGUE ANALYSIS</h4>
                     <!-- <img src="./images/projects/flipchip-geometry.png" alt="Fatigue analysis results" class="project-image">
                     <p class="image-caption">Accumulated plastic strain distribution in solder joints</p> -->
                     <ul class="feature-list">
                         <li>Accumulated plastic strain extracted from stabilized cycles</li>
-                        <li>Fatigue life estimated using:
-                            <ul class="feature-list">
-                                <li>Kanchanomai model</li>
-                                <li>Andersson model</li>
-                            </ul>
+                        <li>Fatigue life estimated using: Kanchanomai model and Andersson model
+                            <!-- <ul class="feature-list">
+                                <li></li>
+                                <li></li>
+                            </ul> -->
                         </li>
                         <li>Conservative design chosen by selecting lower of the two predictions</li>
                     </ul>
@@ -1401,9 +1400,9 @@
                 </div>
 
 
-                    <div class="column">
-                        <div class="card">
-                            <h4><span class="section-icon">🔩</span> MATERIAL BEHAVIOR</h4>
+                    <div class="column" >
+                        <div class="card" style="height: 100%;">
+                            <h4> MATERIAL BEHAVIOR</h4>
                             <!-- <img src="./images/projects/flipchip-strain.png" alt="Material properties diagram" class="project-image">
                             <p class="image-caption">Material property characterization for simulation</p> -->
                             <ul class="feature-list">
@@ -1418,9 +1417,19 @@
 
                  <!-- <div class="column"> -->
                         <div class="card">
-                            <h4><span class="section-icon">📐</span> GEOMETRY & MODELING</h4>
-                            <img src="./images/projects/flipchip-geometry.png" alt="FEM model geometry" class="project-image">
-                            <p class="image-caption">2D plane strain model of diagonal flip-chip cross-section</p>
+                            <h4 > GEOMETRY & MODELING</h4>
+                            <div class="" style="width: 100%; padding: 20px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                                <div >
+                                    <img src="./images/projects/flipchip-geometry.png" style="height: 300px; width: 500px;" alt="FEM model geometry" class="project-image">
+                                </div>
+                               <div style="">
+                                    <img src="./images/projects/WhatsApp Image 2025-06-03 at 12.12.46 AM.jpeg" style="height: 300px; width: 500px;"" alt="FEM model geometry" class="project-image">
+                                    
+                               </div>
+                            </div>
+                             <p class="image-caption">2D plane strain model of diagonal flip-chip cross-section</p>
+
+                            
                             <ul class="feature-list">
                                 <li>2D plane strain model of diagonal flip-chip cross-section</li>
                                 <li>Shared topology meshing for accurate stress continuity</li>
@@ -1435,14 +1444,13 @@
             <!-- Parametric Design Optimization -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🔁</span>
                     PARAMETRIC DESIGN OPTIMIZATION
                 </h2>
                 
-                <div class="row">
-                    <div class="column" style="height:100%">
-                        <div class="card">
-                            <h4><span class="section-icon">📊</span> VARIABLES STUDIED</h4>
+                <div class="row" style="margin-bottom: 25px;">
+                    <div class="column">
+                        <div class="card" style="height: 100%;">
+                            <h4> VARIABLES STUDIED</h4>
                             <!-- <img src="./images/projects/flipchip-strain.png" alt="Design variables illustration" class="project-image">
                             <p class="image-caption">Parametric study variables: glass thickness and underfill coverage</p> -->
                             <ul class="feature-list">
@@ -1452,7 +1460,7 @@
                         </div>
                     </div>
                     <div class="column">
-                        <div class="card">
+                        <div class="card" style="height: 100%;">
                             <h4><span class="section-icon">🏁</span> FINDINGS</h4>
                             
                             <ul class="feature-list">
@@ -1498,15 +1506,18 @@
                         </tbody>
                     </table>
 
-                    <img src="./images/projects/flipchip-strain.png" alt="Stress trend graph" class="project-image">
+                    <div style="text-align: center;">
+                            <img src="./images/projects/flipchip-strain.png" alt="Stress trend graph" class="project-image">
                             <p class="image-caption">Non-linear stress trend with varying glass thickness</p>
+                    </div>
+
+                    
                 </div>
             </section>
 
             <!-- Impact -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🧠</span>
                     IMPACT
                 </h2>
                 <div class="card">
@@ -1522,13 +1533,15 @@
             <!-- Future Work -->
             <section class="section">
                 <h2 class="section-title">
-                    <span class="section-icon">🔭</span>
                     FUTURE WORK
                 </h2>
                 <div class="card">
+                    <div style="text-align: center;">
                     <img src="./images/projects/flipchip-fatigue-graph.png" alt="Future research directions" class="project-image">
                     <p class="image-caption">Proposed extensions for future research</p>
                     
+                    </div>
+                  
                     <ul class="feature-list">
                         <li>Extend to 2.5D and 3D models for improved Z-axis accuracy</li>
                         <li>Investigate arc fillet profiles and organic substrates</li>
