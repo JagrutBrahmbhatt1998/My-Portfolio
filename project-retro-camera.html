@@ -1,0 +1,964 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip-Chip Reliability Modeling</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .project-container {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .project-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        .project-container table {
+            width: 100%;
+            margin: 30px 0;
+            border-collapse: collapse;
+            background: #1e1e1e;
+        }
+        .project-container th, .project-container td {
+            padding: 15px;
+            border: 1px solid #444;
+            text-align: center;
+            color: white;
+        }
+        .project-container h2 {
+            margin-top: 50px;
+        }
+        .project-container ul {
+            margin: 10px 0 30px 20px;
+            line-height: 1.8;
+        }
+        .project-container p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="s-header">
+    <div class="row wide main-nav-wrap">
+        <nav class="column lg-12 main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#works">← Back to Projects</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="s-content">
+    <section class="project-container">
+        <h1>Thermomechanical Reliability Modeling for Flip-Chip Glass Core Packages</h1>
+        <h4>Microelectronics Packaging | Parametric Fatigue Optimization</h4>
+        <p><strong>Team Lead:</strong> Jagrut Brahmbhatt<br>
+           <strong>Professor:</strong> Dr. Suresh Sitaraman</p>
+
+        <h2>🧩 Project Overview</h2>
+        <p>
+            Flip-chip glass core substrates offer new frontiers in electronic miniaturization, but they pose reliability risks under thermal cycling. This project simulates fatigue using FEM and viscoplastic models to predict and mitigate these challenges.
+        </p>
+        <img src="images/projects/flipchip-geometry.png" alt="Flip-Chip Geometry">
+
+        <h2>🔍 Failure Mode & Risk (FMEA)</h2>
+        <ul>
+            <li><strong>Failure:</strong> Solder joint fatigue under strain</li>
+            <li><strong>Root Cause:</strong> Coefficient of thermal expansion (CTE) mismatch</li>
+            <li><strong>Effect:</strong> Die corner cracking → electrical failure</li>
+            <li><strong>RPN:</strong> 135</li>
+            <li><strong>Detection:</strong> ANSYS FEM using Anand viscoplastic model</li>
+        </ul>
+
+        <h2>🧪 Technical Approach</h2>
+
+        <h3>📐 Geometry & Modeling</h3>
+        <ul>
+            <li>2D diagonal cross-section using PLANE183 elements</li>
+            <li>Shared topology meshing for stress continuity</li>
+        </ul>
+        <img src="images/projects/flipchip-mesh.png" alt="Mesh Example">
+
+        <h3>🔩 Material Behavior</h3>
+        <ul>
+            <li>SnAg solder → Anand model</li>
+            <li>Copper → Bilinear hardening</li>
+            <li>Others → Temp-dependent elastic properties</li>
+            <li>Cycle range: –55°C to 125°C (JEDEC standard)</li>
+        </ul>
+
+        <h3>🧮 Fatigue Analysis</h3>
+        <ul>
+            <li>Used Kanchanomai & Andersson models</li>
+            <li>Selected conservative (lower) cycle count</li>
+        </ul>
+        <img src="images/projects/flipchip-strain.png" alt="Strain Plot">
+
+        <h3>🔁 Parametric Optimization</h3>
+        <ul>
+            <li><strong>Variables:</strong> Glass thickness (200–400 µm), underfill (none to full)</li>
+            <li><strong>Best Result:</strong> 400 µm + half underfill → ~2,494 cycles</li>
+        </ul>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Δε (%)</th>
+                    <th>Cycles (Kanchanomai)</th>
+                    <th>Cycles (Andersson)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200 µm, no underfill</td>
+                    <td>1.95E-2</td>
+                    <td>1,908</td>
+                    <td>2,002</td>
+                </tr>
+                <tr>
+                    <td>400 µm, half underfill</td>
+                    <td>1.67E-2</td>
+                    <td>2,249</td>
+                    <td>2,494</td>
+                </tr>
+                <tr>
+                    <td>400 µm, full underfill</td>
+                    <td>1.73E-2</td>
+                    <td>2,173</td>
+                    <td>2,381</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Fatigue Graph">
+
+        <h2>🧠 Impact</h2>
+        <p>This FEM-based analysis framework highlights critical design parameters that affect fatigue life in next-gen packaging. It provides a path to more robust, reliable electronics through simulation-driven design.</p>
+
+        <h2>🔭 Future Work</h2>
+        <ul>
+            <li>Transition to 2.5D/3D modeling</li>
+            <li>Explore standoff heights and multilayer ABF</li>
+            <li>Integrate experimental thermal cycle test data</li>
+        </ul>
+    </section>
+</main>
+
+</body>
+</html> -->
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip-Chip Reliability Modeling</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary: hsl(36, 72%, 70%);
+            --accent: #23967f;
+            --bg-dark: #0f0f0f;
+            --text-light: #f1f1f1;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Public Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .project-container {
+            padding-inline: 80px 40px;
+            padding-block: 20px;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeIn 1s ease;
+        }
+
+        .project-container img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .project-container img:hover {
+            transform: scale(1.03);
+        }
+
+        .project-container h1, .project-container h2 {
+            color: var(--primary);
+        }
+
+        .project-container h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .project-container a.btn {
+            display: inline-block;
+            /* margin-top: 30px; */
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+        }
+
+        .project-container a.btn:hover {
+            background-color: var(--primary);
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #1e1e1e;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #444;
+            color: white;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        .bthbtn
+        {
+            background-color: var(--primary); 
+            color: rgb(255, 255, 255);
+            padding-inline: 25px;
+            padding-block: 20px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+        .bthbtn:hover
+        {
+            background-color: white;
+            color: var(--primary); 
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- <header class="s-header">
+    <div class="row wide main-nav-wrap">
+        <nav class="column lg-12 main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#works">← Back to Projects</a></li>
+            </ul>
+        </nav>
+    </div>
+</header> -->
+
+<!-- <main class="s-content">
+    <section class="project-container">
+        <h1>Thermomechanical Reliability Modeling</h1>
+        <h4>Flip-Chip Glass Core Packages | Fatigue Analysis</h4>
+        <p><strong>Team Lead:</strong> Jagrut Brahmbhatt<br>
+           <strong>Professor:</strong> Dr. Suresh Sitaraman</p>
+
+        <h2>🔍 Project Overview</h2>
+        <p>This project tackles fatigue challenges in ultra-miniaturized electronics by simulating Level-1 flip-chip assemblies using FEM, viscoplastic modeling, and parametric optimization.</p>
+        <img src="images/projects/flipchip-geometry.png" alt="Flip-Chip Geometry">
+
+        <h2>💥 FMEA: Failure & Risk</h2>
+        <ul>
+            <li><strong>Failure:</strong> Low-cycle fatigue at solder joints</li>
+            <li><strong>Root Cause:</strong> CTE mismatch</li>
+            <li><strong>Effect:</strong> Die corner cracking → electrical disconnect</li>
+            <li><strong>RPN:</strong> 135</li>
+        </ul>
+
+        <img src="images/projects/flipchip-strain.png" alt="Strain Analysis">
+
+        <h2>🛠️ Simulation Strategy</h2>
+        <ul>
+            <li>2D plane strain geometry using PLANE183</li>
+            <li>SnAg solder → Anand model</li>
+            <li>Thermal cycling: –55°C to 125°C</li>
+            <li>Fatigue Models: Kanchanomai & Andersson</li>
+        </ul>
+
+        <img src="images/projects/flipchip-mesh.png" alt="Mesh Diagram">
+
+        <h2>📊 Parametric Design Optimization</h2>
+        <p><strong>Best Result:</strong> 400 µm glass + half underfill → ~2,494 cycles</p>
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Fatigue Analysis Graph">
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Δε (%)</th>
+                    <th>Cycles (Kanchanomai)</th>
+                    <th>Cycles (Andersson)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200 µm, no underfill</td>
+                    <td>1.95E-2</td>
+                    <td>1,908</td>
+                    <td>2,002</td>
+                </tr>
+                <tr>
+                    <td>400 µm, half underfill</td>
+                    <td>1.67E-2</td>
+                    <td>2,249</td>
+                    <td>2,494</td>
+                </tr>
+                <tr>
+                    <td>400 µm, full underfill</td>
+                    <td>1.73E-2</td>
+                    <td>2,173</td>
+                    <td>2,381</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🌟 Impact</h2>
+        <p>This model provides a simulation-backed strategy to enhance reliability in next-gen electronics through optimized design and risk-based analysis.</p>
+
+        <h2>🔭 Future Scope</h2>
+        <ul style="margin-bottom: 10%;">
+            <li>3D model transition</li>
+            <li>Board-level FEM (Level 2)</li>
+            <li>Experimental validation</li>
+        </ul>
+        <div style="margin-block: 60px;">
+        <a href="index.html#works" class="bthbtn">← Back to Projects</a>
+
+        </div>
+    </section>
+</main>
+
+</body>
+</html> --> 
+
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip-Chip Reliability Modeling</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary: #eabe7c;
+            --accent: #23967f;
+            --bg-dark: #0f0f0f;
+            --text-light: #f1f1f1;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Public Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-carousel img.active {
+            opacity: 0.3;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            color: var(--primary);
+            font-size: 5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+            color: var(--text-light);
+            font-size: 2rem;
+        }
+
+        .project-container {
+            padding: 80px 40px;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeIn 1s ease;
+        }
+
+        .project-container img.content-img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        /* .project-container img.content-img:hover {
+            transform: scale(1.03);
+        } */
+
+        .project-container h1, .project-container h2 {
+            color: var(--primary);
+        }
+
+        .project-container h4 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .project-container a.btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+        }
+
+        .project-container a.btn:hover {
+            background-color: var(--primary);
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #1e1e1e;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #444;
+            color: white;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+        h2
+        {
+            margin:0
+        }
+         .bthbtn
+        {
+            background-color: var(--primary); 
+            color: rgb(255, 255, 255);
+            padding-inline: 25px;
+            padding-block: 20px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<header class="s-header">
+    <div class="row wide main-nav-wrap">
+        <nav class="column lg-12 main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#works">← Back to Projects</a></li>
+            </ul>
+        </nav>
+    </div>
+</header> -->
+
+<!-- <div class="hero-section">
+    <div class="hero-carousel">
+        <img src="images/projects/flipchip-geometry.png" class="active" alt="Hero 1">
+        <img src="images/projects/flipchip-mesh.png" alt="Hero 2">
+        <img src="images/projects/flipchip-strain.png" alt="Hero 3">
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Hero 4">
+    </div>
+    <div class="hero-content">
+        <h1>Thermomechanical Reliability Modeling</h1>
+        <p>Team Lead: Jagrut Brahmbhatt &mdash; Professor: Dr. Suresh Sitaraman</p>
+    </div>
+</div>
+
+<main class="s-content">
+    <section class="project-container">
+        <h2>🔍 Project Overview</h2>
+        <p>This project tackles fatigue challenges in ultra-miniaturized electronics by simulating Level-1 flip-chip assemblies using FEM, viscoplastic modeling, and parametric optimization.</p>
+        <img src="images/projects/flipchip-geometry.png" alt="Flip-Chip Geometry" class="content-img">
+
+        <h2>💥 FMEA: Failure & Risk</h2>
+        <ul>
+            <li><strong>Failure:</strong> Low-cycle fatigue at solder joints</li>
+            <li><strong>Root Cause:</strong> CTE mismatch</li>
+            <li><strong>Effect:</strong> Die corner cracking → electrical disconnect</li>
+            <li><strong>RPN:</strong> 135</li>
+        </ul>
+        <img src="images/projects/flipchip-strain.png" alt="Strain Analysis" class="content-img">
+
+        <h2>🛠️ Simulation Strategy</h2>
+        <ul>
+            <li>2D plane strain geometry using PLANE183</li>
+            <li>SnAg solder → Anand model</li>
+            <li>Thermal cycling: –55°C to 125°C</li>
+            <li>Fatigue Models: Kanchanomai & Andersson</li>
+        </ul>
+        <img src="images/projects/flipchip-mesh.png" alt="Mesh Diagram" class="content-img">
+
+        <h2>📊 Parametric Design Optimization</h2>
+        <p><strong>Best Result:</strong> 400 µm glass + half underfill → ~2,494 cycles</p>
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Fatigue Analysis Graph" class="content-img">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Δε (%)</th>
+                    <th>Cycles (Kanchanomai)</th>
+                    <th>Cycles (Andersson)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200 µm, no underfill</td>
+                    <td>1.95E-2</td>
+                    <td>1,908</td>
+                    <td>2,002</td>
+                </tr>
+                <tr>
+                    <td>400 µm, half underfill</td>
+                    <td>1.67E-2</td>
+                    <td>2,249</td>
+                    <td>2,494</td>
+                </tr>
+                <tr>
+                    <td>400 µm, full underfill</td>
+                    <td>1.73E-2</td>
+                    <td>2,173</td>
+                    <td>2,381</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🌟 Impact</h2>
+        <p>This model provides a simulation-backed strategy to enhance reliability in next-gen electronics through optimized design and risk-based analysis.</p>
+
+        <h2>🔭 Future Scope</h2>
+        <ul>
+            <li>3D model transition</li>
+            <li>Board-level FEM (Level 2)</li>
+            <li>Experimental validation</li>
+        </ul>
+
+        <div style="margin-block: 60px;">
+            <a href="index.html#works" class="bthbtn">← Back to Projects</a>
+        </div>    
+    </section>
+</main>
+
+<script>
+    let current = 0;
+    const images = document.querySelectorAll('.hero-carousel img');
+    setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+    }, 4000);
+</script>
+
+</body>
+</html>  -->
+
+
+<!-- --------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip-Chip Reliability Modeling</title>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary: #eabe7c;
+            --accent: #23967f;
+            --bg-dark: #0f0f0f;
+            --text-light: #f1f1f1;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Public Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-carousel img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-carousel img.active {
+            opacity: 0.3;
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+        }
+
+        .project-container {
+            padding: 80px 40px;
+            max-width: 1100px;
+            margin: auto;
+            animation: fadeIn 1s ease;
+        }
+
+        .section-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .section-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .section-text {
+            flex: 1 1 50%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section-img {
+            flex: 1 1 45%;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .section-img img:hover {
+            transform: scale(1.05);
+        }
+
+        .project-container h2 {
+            color: var(--primary);
+        }
+
+        .project-container a.btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: var(--accent);
+            color: #fff;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s ease;
+        }
+
+        .project-container a.btn:hover {
+            background-color: var(--primary);
+            color: black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background-color: #1e1e1e;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #444;
+            color: white;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .section-row {
+                flex-direction: column !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="s-header">
+    <div class="row wide main-nav-wrap">
+        <nav class="column lg-12 main-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#works">← Back to Projects</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="hero-section">
+    <div class="hero-carousel">
+        <img src="images/projects/flipchip-geometry.png" class="active" alt="Hero 1">
+        <img src="images/projects/flipchip-mesh.png" alt="Hero 2">
+        <img src="images/projects/flipchip-strain.png" alt="Hero 3">
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Hero 4">
+    </div>
+    <div class="hero-content">
+        <h1>Thermomechanical Reliability Modeling</h1>
+        <p>Team Lead: Jagrut Brahmbhatt &mdash; Professor: Dr. Suresh Sitaraman</p>
+    </div>
+</div>
+
+<main class="s-content">
+    <section class="project-container">
+        <div class="section-row">
+    <div class="section-text">
+        <h2>📌 Problem Statement</h2>
+        <p>As flip-chip packaging moves toward glass core substrates, it introduces new challenges in mechanical reliability, particularly under thermomechanical stress from cyclic temperature variations. Our goal is to evaluate solder joint fatigue and predict failure using advanced simulation methods.</p>
+    </div>
+    <div class="section-img">
+        <img src="images/projects/flipchip-geometry.png" alt="Geometry Setup">
+    </div>
+</div>
+
+<div class="section-row">
+    <div class="section-text">
+        <h2>🔬 Methodology</h2>
+        <ul>
+            <li>2D diagonal cross-section modeled in ANSYS using PLANE183 elements</li>
+            <li>Shared topology meshing to ensure stress continuity</li>
+            <li>Anand viscoplastic model applied to SnAg solder material</li>
+            <li>Other materials modeled with bilinear and temp-dependent elasticity</li>
+        </ul>
+    </div>
+    <div class="section-img">
+        <img src="images/projects/flipchip-mesh.png" alt="Mesh View">
+    </div>
+</div>
+
+<div class="section-row">
+    <div class="section-text">
+        <h2>📉 Fatigue Prediction</h2>
+        <p>Fatigue life cycles predicted using two empirical models:</p>
+        <ul>
+            <li>Kanchanomai Model</li>
+            <li>Andersson Model</li>
+        </ul>
+        <p>The lower cycle count was considered for conservative reliability assessment.</p>
+    </div>
+    <div class="section-img">
+        <img src="images/projects/flipchip-strain.png" alt="Strain Distribution">
+    </div>
+</div>
+
+<div class="section-row">
+    <div class="section-text">
+        <h2>⚙️ Parametric Analysis</h2>
+        <p>Design parameters varied to study their impact on fatigue:</p>
+        <ul>
+            <li>Glass Core Thickness: 200µm, 400µm</li>
+            <li>Underfill: None, Half, Full</li>
+        </ul>
+        <p>Optimal setup found at 400µm glass core with half underfill, showing improved fatigue life.</p>
+    </div>
+    <div class="section-img">
+        <img src="images/projects/flipchip-fatigue-graph.png" alt="Fatigue Results">
+    </div>
+</div>
+
+<div class="section-row">
+    <div class="section-text">
+        <h2>📊 Fatigue Life Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Configuration</th>
+                    <th>Δε (%)</th>
+                    <th>Cycles (Kanchanomai)</th>
+                    <th>Cycles (Andersson)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200 µm, no underfill</td>
+                    <td>1.95E-2</td>
+                    <td>1,908</td>
+                    <td>2,002</td>
+                </tr>
+                <tr>
+                    <td>400 µm, half underfill</td>
+                    <td>1.67E-2</td>
+                    <td>2,249</td>
+                    <td>2,494</td>
+                </tr>
+                <tr>
+                    <td>400 µm, full underfill</td>
+                    <td>1.73E-2</td>
+                    <td>2,173</td>
+                    <td>2,381</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="section-row">
+    <div class="section-text">
+        <h2>🚀 Conclusion</h2>
+        <p>The combination of 400 µm glass and partial underfill results in a significantly longer fatigue life, validating the effectiveness of parametric optimization through FEM simulation.</p>
+        <p>This project sets the foundation for further exploration into more advanced 3D simulations and experimental verification in next-generation packaging systems.</p>
+        <a class="btn" href="index.html#works">← Back to Projects</a>
+    </div>
+</div>
+    </section>
+</main>
+
+<script>
+    let current = 0;
+    const images = document.querySelectorAll('.hero-carousel img');
+    setInterval(() => {
+        images[current].classList.remove('active');
+        current = (current + 1) % images.length;
+        images[current].classList.add('active');
+    }, 4000);
+</script>
+
+</body>
+</html>
