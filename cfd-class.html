@@ -410,22 +410,26 @@
                     </div>
                     <div class="column">
                         <div class="card">
-                            <h4>Root Cause</h4>
-                            <p>CTE mismatch between silicon, glass, underfill, and solder materials</p>
+                            <h4>Discretization Techniques:</h4>
+                            <ul style="list-style-type: disc; margin-left: 20px;">
+                            <li>Central Difference Method for spatial derivatives (second-order accuracy).</li>
+                            <li>Jacobi Iteration for solving the Poisson equation related to ψ.</li>
+                            <li>Upwind Scheme for stabilizing convective terms in the vorticity transport equation.</li>
+                        </ul>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="column">
                         <div class="card">
-                            <h4>Effect</h4>
-                            <p>Cracking at die corners → electrical disconnect → long-term failure</p>
+                            <h4>Boundary and Initial Conditions:</h4>
+                            <p>No-slip at top/bottom walls, prescribed velocity at inlet, and gradient continuity at outlet.</p>
                         </div>
                     </div>
                     <div class="column">
                         <div class="card">
-                            <h4>Risk Level (RPN)</h4>
-                            <p><strong>135 (High)</strong> = Severity (9) × Occurrence (5) × Detection (3)</p>
+                            <h4>Stability Constraint</h4>
+                            <p><strong>Enforced Peclet number < 0.25 for stable explicit time advancement.</p>
                         </div>
                     </div>
                 </div>
@@ -433,9 +437,9 @@
                     <!-- <img src="./images/projects/flipchip-mesh.png" alt="Failure mode analysis diagram" class="project-image">
                     <p class="image-caption">Failure mode analysis and risk assessment framework</p> -->
                     
-                    <h4>Detection & Mitigation</h4>
-                    <p><strong>Detection:</strong> FEM simulation (ANSYS), Anand viscoplastic modeling, validated via corrected Suhir model</p>
-                    <p><strong>Mitigation:</strong> Parametric FEM analysis on glass thickness and underfill coverage</p>
+                    <h4>Simulation Setup</h4>
+                    <p>2D channel: 61×41 grid points, Δt = 0.001 s, Re = 250, inlet velocity = 1.0 unit.</p>
+                    <p>Implemented in MATLAB 2024 for numerical solution and visualization.</p>
                 </div>
             </section>
 
@@ -443,64 +447,59 @@
             <section class="section">
                 <h2 class="section-title">
                    
-                    TECHNICAL APPROACH
+                    RESULTS & ANALYSIS
                 </h2>
                 
                 <div class="row" style="margin-bottom: 25px;">
                    <div class="column">
                 <div class="card" style="height: 100%;">
-                    <h4> FATIGUE ANALYSIS</h4>
+                    <h4>VELOCITY PROFILE</h4>
                     <!-- <img src="./images/projects/flipchip-geometry.png" alt="Fatigue analysis results" class="project-image">
                     <p class="image-caption">Accumulated plastic strain distribution in solder joints</p> -->
                     <ul class="feature-list">
-                        <li>Accumulated plastic strain extracted from stabilized cycles</li>
-                        <li>Fatigue life estimated using: Kanchanomai model and Andersson model
+                        <li>The simulation output matched the analytical solution for parabolic laminar flow.</li>
+                        <li>Maximum velocity occurred at the channel centerline, confirming correct implementation.
                             <!-- <ul class="feature-list">
                                 <li></li>
                                 <li></li>
                             </ul> -->
                         </li>
-                        <li>Conservative design chosen by selecting lower of the two predictions</li>
+                        <li>Boundary velocities converged to zero, validating the no-slip condition.</li>
                     </ul>
+                    <div class="" style="display: flex; justify-content: center;">
+                        <img src="./images/projects/cfd-class-2.jpg" alt="Velocity Profile" style="height: 350px; width: 400px;">
+                    </div>
                 </div>
+                
+                    
+                
                 </div>
 
 
                     <div class="column" >
                         <div class="card" style="height: 100%;">
-                            <h4> MATERIAL BEHAVIOR</h4>
+                            <h4>STREAMLINE VISUALIZATION</h4>
                             <!-- <img src="./images/projects/flipchip-strain.png" alt="Material properties diagram" class="project-image">
                             <p class="image-caption">Material property characterization for simulation</p> -->
                             <ul class="feature-list">
-                                <li>SnAg solder modeled with Anand viscoplasticity</li>
-                                <li>Copper: bilinear isotropic hardening</li>
-                                <li>Glass, silicon, ABF-Cu, underfill: temperature-dependent elastic models</li>
-                                <li>Thermal cycling from –55°C to 125°C applied over 11 cycles (JEDEC JESD22-A104 Condition B)</li>
+                                <li>Developed flow showed parallel streamlines at the outlet.</li>
+                                <li>Initial perturbations near the inlet were present but diminished downstream, indicating development toward steady laminar flow.</li>
+                               
                             </ul>
+                            <div style="display: flex;justify-content: center;">
+                                <img src="./images/projects/cfd-class-3.jpg" alt="stream visulaization" style="height: 350px; width: 400px; margin-top: 65px;">    
+                            </div>
                         </div>
                     </div>
                 </div>
 
                  <!-- <div class="column"> -->
                         <div class="card">
-                            <h4 > GEOMETRY & MODELING</h4>
-                            <div class="" style="width: 100%; padding: 20px; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                                <div >
-                                    <img src="./images/projects/flipchip-geometry.png" style="height: 300px; width: 500px;" alt="FEM model geometry" class="project-image">
-                                </div>
-                               <div style="">
-                                    <img src="./images/projects/2d58848f-29a7-432a-899e-c29f8d0c81ac.jpg" style="height: 300px; width: 500px;"" alt="FEM model geometry" class="project-image">
-                                    
-                               </div>
-                            </div>
-                             <p class="image-caption">2D plane strain model of diagonal flip-chip cross-section</p>
-
-                            
+                            <h4 >TOOLS & TECHNOLOGY</h4>
                             <ul class="feature-list">
-                                <li>2D plane strain model of diagonal flip-chip cross-section</li>
-                                <li>Shared topology meshing for accurate stress continuity</li>
-                                <li>Fine mesh at solder joints to capture stress gradients</li>
-                                <li>PLANE183 elements used for nonlinear plasticity and viscoplastic behavior</li>
+                                <li>Software: MATLAB 2024</li>
+                                <li>Methods Used: Finite difference method, iterative solvers, vorticity–stream function formulation</li>
+                                <li>Mathematical Models: Modified Navier-Stokes equations for incompressible 2D flow</li>
                             </ul>
                         </div>
                     <!-- </div> -->
@@ -508,7 +507,7 @@
             </section>
 
             <!-- Parametric Design Optimization -->
-            <section class="section">
+            <!-- <section class="section">
                 <h2 class="section-title">
                     PARAMETRIC DESIGN OPTIMIZATION
                 </h2>
@@ -517,8 +516,7 @@
                     <div class="column">
                         <div class="card" style="height: 100%;">
                             <h4> VARIABLES STUDIED</h4>
-                            <!-- <img src="./images/projects/flipchip-strain.png" alt="Design variables illustration" class="project-image">
-                            <p class="image-caption">Parametric study variables: glass thickness and underfill coverage</p> -->
+                          
                             <ul class="feature-list">
                                 <li><strong>Glass thickness:</strong> 200 µm, 300 µm, 400 µm</li>
                                 <li><strong>Underfill coverage:</strong> None, Half Fillet, Full Fillet</li>
@@ -538,7 +536,7 @@
                     </div>
                 </div>
 
-                <!-- Results Table -->
+              
                 <div class="card">
                     <h4>Optimization Results</h4>
                     <table class="results-table">
@@ -579,7 +577,7 @@
 
                     
                 </div>
-            </section>
+            </section> -->
 
             <!-- Impact -->
             <section class="section">
@@ -590,9 +588,10 @@
                     <!-- <img src="/placeholder.svg?height=300&width=800" alt="Project impact visualization" class="project-image">
                     <p class="image-caption">Reliability improvement through optimized design parameters</p> -->
                     
-                    <p>This study offers a validated simulation-based strategy to guide the design of reliable, high-density flip-chip assemblies for next-gen electronics. It pinpoints material and structural interactions that contribute to premature failure and proposes physically grounded optimizations to extend device lifespan.</p>
+                    <p>Demonstrated how classical fluid dynamics problems can be solved efficiently using scalar formulations</p>
                     
-                    <p>From a systems engineering perspective, the work also provides a risk-reduction framework that integrates failure identification, sensitivity analysis, and simulation-validated design tradeoffs—critical for manufacturable, robust packaging solutions.</p>
+                    <p>Reinforced the importance of numerical stability, convergence criteria, and boundary treatment in CFD.</p>
+                    <p>Provided a solid base for extending simulations to more complex geometries, unsteady flows, or thermal coupling in future work</p>
                 </div>
             </section>
 
@@ -609,11 +608,10 @@
                     </div> -->
                   
                     <ul class="feature-list">
-                        <li>Extend to 2.5D and 3D models for improved Z-axis accuracy</li>
-                        <li>Investigate arc fillet profiles and organic substrates</li>
-                        <li>Study standoff height variations and multi-layer ABF effects</li>
-                        <li>Perform board-level FEM modeling (Level 2 assembly)</li>
-                        <li>Correlate results with experimental data from thermal cycle tests</li>
+                        <li>Introduce finer grid refinement to capture early flow development more accurately.</li>
+                        <li>Expand to transient or 3D laminar/turbulent cases.</li>
+                        <li>Integrate heat transfer for conjugate flow modeling in thermal-fluid systems.</li>
+                        
                     </ul>
                 </div>
             </section>
