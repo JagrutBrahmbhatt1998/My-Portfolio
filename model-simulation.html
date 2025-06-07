@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="no-js ss-preload" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Optimization of Pressure Drop in ASTM A312 TP 316 Stainless Steel Pipes for Light Crude Oil Transport - Jagrut Brahmbhatt</title>
+    <meta name="description" content="Thermomechanical Reliability Modeling for Flip-Chip Glass Core Packages">
+    <meta name="author" content="Jagrut Brahmbhatt">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --font-1: "Public Sans", sans-serif;
+            --font-2: "DM Serif Display", serif;
+            --color-1: hsla(36, 72%, 70%, 1);
+            --color-2: hsla(168, 62%, 36%, 1);
+            --color-text: #a1a1a2;
+            --color-text-dark: #ffffff;
+            --color-text-light: #727373;
+            --color-body: #141516;
+            --color-border: rgba(255, 255, 255, .05);
+            --color-gray-9: #2c2c2d;
+            --color-gray-10: #141516;
+            --base-size: 62.5%;
+            --base-font-size: 1.9rem;
+            --space: 3.2rem;
+            --vspace-0_5: calc(0.5 * var(--space));
+            --vspace-1: var(--space);
+            --vspace-1_5: calc(1.5 * var(--space));
+            --vspace-2: calc(2 * var(--space));
+            --vspace-3: calc(3 * var(--space));
+            --vspace-4: calc(4 * var(--space));
+            --text-xs: 1.319rem;
+            --text-sm: 1.583rem;
+            --text-size: 1.9rem;
+            --text-md: 2.28rem;
+            --text-lg: 2.736rem;
+            --text-xl: 3.283rem;
+            --text-xxl: 3.94rem;
+            --text-display-1: 5.673rem;
+            --width-max: 1200px;
+            --gutter: 2rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: var(--base-size);
+        }
+
+        body {
+            font-family: var(--font-1);
+            font-size: var(--base-font-size);
+            font-weight: 300;
+            line-height: var(--vspace-1);
+            color: var(--color-text);
+            background-color: var(--color-body);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: justify;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-2);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: var(--text-display-1);
+            line-height: var(--vspace-2);
+            margin-bottom: var(--vspace-1);
+        }
+
+        h2 {
+            font-size: var(--text-xxl);
+            line-height: var(--vspace-1_5);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        h3 {
+            font-size: var(--text-xl);
+            line-height: 1.25;
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        h4 {
+            font-size: var(--text-lg);
+            line-height: var(--vspace-1);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        p {
+            margin-bottom: var(--vspace-1);
+            text-align: justify;
+        }
+
+        a {
+            color: var(--color-1);
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--color-2);
+        }
+
+        /* Layout */
+        .container {
+            width: 92%;
+            max-width: var(--width-max);
+            margin: 0 auto;
+            padding: 0 0 var(--vspace-4) 0; /* Removed top padding */
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 calc(var(--gutter) * -1);
+        }
+
+        .column {
+            padding: 0 var(--gutter);
+            flex: 1;
+        }
+
+        /* Header */
+        .project-header {
+            text-align: center;
+            margin-bottom: var(--vspace-3);
+            padding: var(--vspace-3) 0;
+            border-bottom: 1px solid var(--color-border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: var(--text-xl);
+            margin-bottom: var(--vspace-0_5);
+            color: var(--color-1);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-subtitle {
+            font-size: var(--text-md);
+            color: var(--color-text-light);
+            margin-bottom: var(--vspace-1);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--vspace-1);
+            flex-wrap: wrap;
+            margin-bottom: var(--vspace-1);
+        }
+
+        .meta-item {
+            background: var(--color-gray-9);
+            padding: var(--vspace-0_5) var(--vspace-1);
+            border-radius: 4px;
+            font-size: var(--text-sm);
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 5px;
+            padding: var(--vspace-1) 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--vspace-1);
+            font-size: var(--text-lg);
+            color: var(--color-1);
+        }
+
+        .section-icon {
+            margin-right: var(--vspace-0_5);
+            font-size: var(--text-md);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-gray-9);
+            padding: var(--vspace-1_5);
+            border-radius: 8px;
+            margin-bottom: var(--vspace-1);
+            border: 1px solid var(--color-border);
+        }
+
+        .card h4 {
+            color: var(--color-1);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        /* Table */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--vspace-1) 0;
+            background: var(--color-gray-9);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: var(--vspace-0_5) var(--vspace-1);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .results-table th {
+            background: var(--color-gray-10);
+            color: var(--color-text-dark);
+            font-weight: 600;
+            font-size: var(--text-sm);
+        }
+
+        .results-table td {
+            font-size: var(--text-sm);
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            /* margin: var(--vspace-1) 0; */
+        }
+
+        .feature-list li {
+            padding: var(--vspace-0_5) 0;
+            padding-left: var(--vspace-1_5);
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "▸";
+            color: var(--color-1);
+            position: absolute;
+            left: 0;
+            top: var(--vspace-0_5);
+        }
+
+        /* Navigation */
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--color-gray-9);
+            padding: var(--vspace-0_5) var(--vspace-1);
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
+            z-index: 100;
+        }
+
+        .nav-back:hover {
+            background: var(--color-1);
+            color: var(--color-body);
+        }
+
+        /* Images */
+        .project-image {
+            width: 60%;
+            border-radius: 8px;
+            margin-bottom: var(--vspace-1);
+            border: 1px solid var(--color-border);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+            margin-top: -0.5rem;
+            margin-bottom: var(--vspace-1);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 800px) {
+            .container {
+                width: 100%;
+                padding-left: 6vw;
+                padding-right: 6vw;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .nav-back {
+                position: static;
+                margin-bottom: var(--vspace-1);
+                display: inline-block;
+            }
+
+            h1 {
+                font-size: var(--text-xxl);
+            }
+
+            .project-title {
+                font-size: var(--text-lg);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .results-table {
+                font-size: var(--text-xs);
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 0.5rem;
+            }
+        }
+
+    /* Header Background Image */
+    .project-header {
+        position: relative;
+        z-index: 1;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        /* margin-top: calc(-1 * var(--vspace-1)); Extend to top */
+        padding-left: calc(50vw - 50%);
+        padding-right: calc(50vw - 50%);
+        padding-top: var(--vspace-4); /* Add top padding back to header */
+        overflow-x: hidden;
+    }
+
+    .project-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('./images/projects/project-1-banner.jpeg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.15;
+        z-index: -1;
+        overflow-x: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="nav-back">← Back to Portfolio</a>
+
+    <div class="container">
+        <header class="project-header">
+            <h1 class="project-title">OPTIMIZATION OF PRESSURE DROP IN ASTM A312 TP 316 STAINLESS STEEL PIPES FOR LIGHT CRUDE OIL TRANSPORT</h1>
+            <p class="project-subtitle">MICROELECTRONICS PACKAGING | PARAMETRIC FATIGUE OPTIMIZATION</p>
+            <div class="project-meta">
+                <span class="meta-item">TEAM LEAD: Jagrut Brahmbhatt</span>
+                <span class="meta-item">PROFESSOR: Dr. Suresh Sitaraman</span>
+                <span class="meta-item">Georgia Institute of Technology</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Project Overview -->
+            <section class="section">
+                <h2 class="section-title">
+                    PROJECT OVERVIEW
+                </h2>
+                <div class="card">
+
+                    <p>The Problem:</p>
+                    <ul class="feature-list">
+                        <li>In crude oil transportation, excessive pressure drop in pipelines leads to high energy consumption and operational costs. This project aimed to address the challenge of minimizing head loss due to pipe friction while ensuring manufacturing costs remained within budget constraints.</li>
+
+                    </ul>
+                    <p>The Goal:</p>
+                    <ul class="feature-list">
+                        <li>To optimize pipeline performance by reducing pressure drop in ASTM A312 TP316 seamless pipes under uncertainty, without exceeding 65% of the allotted pipe cost.</li>
+                    </ul>
+                    <p>The Context:</p>
+                    <ul class="feature-list">
+                        <li>Given the critical role of pipeline efficiency in the energy sector, especially in harsh environments, the project utilized advanced simulation and modeling techniques to support industrial applications and cost-efficient design.</li>
+                    </ul>
+                </div>
+            </section>
+
+
+
+            <!-- Technical Approach -->
+            <section class="section">
+                <h2 class="section-title">
+                   
+                    METHODS & APPROACH
+                </h2>
+                
+                <div class="column" style="margin-bottom: 25px;">
+                   <div class="row">
+                        <div class="card" style="height: 100%;">
+                        <p>Your Contribution:</p>
+                            <ul class="feature-list">
+                                <li>Led the conceptual design and analysis framework. Conducted Monte Carlo Simulations (MCS), developed regression models, and executed optimization routines. Co-authored the final report and contributed to validation and visualization.</li>
+                            </ul>
+                        <p>Your Methodology:</p>
+                            <ul class="feature-list">
+                                <li>Utilized a combination of Ordinary Least Squares (OLS), Ridge Regression, Monte Carlo Simulation (MCS), and First Order Reliability Method (FORM). Employed MATLAB to perform simulations and minimization using fmincon.</li>
+                            </ul>
+                        <p>Your Unique Angle:</p>
+                            <ul class="feature-list">
+                                <li>Incorporated uncertainty quantification and reliability analysis to move beyond traditional deterministic design, ensuring robust and practical engineering solutions.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </section>
+
+
+
+            <!-- Impact -->
+            <section class="section">
+                <h2 class="section-title">
+                    RESULT AND ANALYSIS
+                </h2>
+                 <div class="card">
+                    <ul class="feature-list">
+                        <li>Results:
+                            <ul  class="feature-list">
+                                <li>Achieved a substantial reduction in pressure head loss. Optimized designs showed nearly negligible head loss (as low as ~4.28 mm), indicating high system efficiency.</li>
+                            </ul>
+                        </li>
+    
+                        <li>Success Metrics::
+                            <ul  class="feature-list">
+                                <li>Reliability Index (β) improved significantly—from 0.231 (physical model) to 1.436 (regression model). The Probability of Failure (Pf) decreased from ~0.41 to ~0.075.</li>
+                            </ul>
+                        </li>
+                        <li>Business Impact:
+                            <ul  class="feature-list">
+                                <li>The optimized pipe design delivers energy savings, enhanced reliability, and reduced material costs—benefits that are highly valuable for large-scale industrial pipeline operations.</li>
+                            </ul>
+                        </li>
+                    </ul> 
+                    <div style="display: flex; justify-content: center;">
+                        <img src="./images/projects/model-simulation-1.png" alt="">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">
+                    LESSON LEARNED & FUTURE PLANS
+                </h2>
+                 <div class="card">
+                    <p>What You Learned:</p>
+                    <ul class="feature-list">
+                        <li>Gained expertise in probabilistic modeling, regression analysis, and optimization under constraints. Deepened understanding of practical applications in mechanical systems and cost-performance tradeoffs.</li>
+                    </ul> 
+                    <div style="display: flex; justify-content: center;"><img src="./images/projects/model-simulation-2.png" alt=""></div> 
+                    <p>Future Applications:</p>
+                    <ul class="feature-list">
+                        <li>The framework can be extended to other pipeline materials and fluids, or used in industries like water treatment and chemical processing to optimize design under uncertainty.</li>
+                    </ul> 
+                    <p>Next Steps:</p>
+                    <ul class="feature-list">
+                        <li>Plan to refine the model by incorporating additional variables like pipe thickness variation, temperature effects, and more advanced surrogate modeling techniques.</li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Future Work -->
+            
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Table hover effects
+        document.querySelectorAll('.results-table tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(234, 190, 124, 0.1)';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+    </script>
+</body>
+</html>
