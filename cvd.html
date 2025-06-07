@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="no-js ss-preload" lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Structural and Thermal Integrity Analysis of CVD Reactor Subassemblies - Jagrut Brahmbhatt</title>
+    <meta name="description" content="Thermomechanical Reliability Modeling for Flip-Chip Glass Core Packages">
+    <meta name="author" content="Jagrut Brahmbhatt">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+        /* CSS Variables */
+        :root {
+            --font-1: "Public Sans", sans-serif;
+            --font-2: "DM Serif Display", serif;
+            --color-1: hsla(36, 72%, 70%, 1);
+            --color-2: hsla(168, 62%, 36%, 1);
+            --color-text: #a1a1a2;
+            --color-text-dark: #ffffff;
+            --color-text-light: #727373;
+            --color-body: #141516;
+            --color-border: rgba(255, 255, 255, .05);
+            --color-gray-9: #2c2c2d;
+            --color-gray-10: #141516;
+            --base-size: 62.5%;
+            --base-font-size: 1.9rem;
+            --space: 3.2rem;
+            --vspace-0_5: calc(0.5 * var(--space));
+            --vspace-1: var(--space);
+            --vspace-1_5: calc(1.5 * var(--space));
+            --vspace-2: calc(2 * var(--space));
+            --vspace-3: calc(3 * var(--space));
+            --vspace-4: calc(4 * var(--space));
+            --text-xs: 1.319rem;
+            --text-sm: 1.583rem;
+            --text-size: 1.9rem;
+            --text-md: 2.28rem;
+            --text-lg: 2.736rem;
+            --text-xl: 3.283rem;
+            --text-xxl: 3.94rem;
+            --text-display-1: 5.673rem;
+            --width-max: 1200px;
+            --gutter: 2rem;
+        }
+
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: var(--base-size);
+        }
+
+        body {
+            font-family: var(--font-1);
+            font-size: var(--base-font-size);
+            font-weight: 300;
+            line-height: var(--vspace-1);
+            color: var(--color-text);
+            background-color: var(--color-body);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-align: justify;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-2);
+            font-weight: 400;
+            color: var(--color-text-dark);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: var(--text-display-1);
+            line-height: var(--vspace-2);
+            margin-bottom: var(--vspace-1);
+        }
+
+        h2 {
+            font-size: var(--text-xxl);
+            line-height: var(--vspace-1_5);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        h3 {
+            font-size: var(--text-xl);
+            line-height: 1.25;
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        h4 {
+            font-size: var(--text-lg);
+            line-height: var(--vspace-1);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        p {
+            margin-bottom: var(--vspace-1);
+            text-align: justify;
+        }
+
+        a {
+            color: var(--color-1);
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: var(--color-2);
+        }
+
+        /* Layout */
+        .container {
+            width: 92%;
+            max-width: var(--width-max);
+            margin: 0 auto;
+            padding: 0 0 var(--vspace-4) 0; /* Removed top padding */
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 calc(var(--gutter) * -1);
+        }
+
+        .column {
+            padding: 0 var(--gutter);
+            flex: 1;
+        }
+
+        /* Header */
+        .project-header {
+            text-align: center;
+            margin-bottom: var(--vspace-3);
+            padding: var(--vspace-3) 0;
+            border-bottom: 1px solid var(--color-border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: var(--text-xl);
+            margin-bottom: var(--vspace-0_5);
+            color: var(--color-1);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-subtitle {
+            font-size: var(--text-md);
+            color: var(--color-text-light);
+            margin-bottom: var(--vspace-1);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--vspace-1);
+            flex-wrap: wrap;
+            margin-bottom: var(--vspace-1);
+        }
+
+        .meta-item {
+            background: var(--color-gray-9);
+            padding: var(--vspace-0_5) var(--vspace-1);
+            border-radius: 4px;
+            font-size: var(--text-sm);
+        }
+
+        /* Content Sections */
+        .section {
+            margin-bottom: 5px;
+            padding: var(--vspace-1) 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--vspace-1);
+            font-size: var(--text-lg);
+            color: var(--color-1);
+        }
+
+        .section-icon {
+            margin-right: var(--vspace-0_5);
+            font-size: var(--text-md);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-gray-9);
+            padding: var(--vspace-1_5);
+            border-radius: 8px;
+            margin-bottom: var(--vspace-1);
+            border: 1px solid var(--color-border);
+        }
+
+        .card h4 {
+            color: var(--color-1);
+            margin-bottom: var(--vspace-0_5);
+        }
+
+        /* Table */
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--vspace-1) 0;
+            background: var(--color-gray-9);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: var(--vspace-0_5) var(--vspace-1);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .results-table th {
+            background: var(--color-gray-10);
+            color: var(--color-text-dark);
+            font-weight: 600;
+            font-size: var(--text-sm);
+        }
+
+        .results-table td {
+            font-size: var(--text-sm);
+        }
+
+        /* Lists */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            /* margin: var(--vspace-1) 0; */
+        }
+
+        .feature-list li {
+            padding: var(--vspace-0_5) 0;
+            padding-left: var(--vspace-1_5);
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "▸";
+            color: var(--color-1);
+            position: absolute;
+            left: 0;
+            top: var(--vspace-0_5);
+        }
+
+        /* Navigation */
+        .nav-back {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: var(--color-gray-9);
+            padding: var(--vspace-0_5) var(--vspace-1);
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
+            z-index: 100;
+        }
+
+        .nav-back:hover {
+            background: var(--color-1);
+            color: var(--color-body);
+        }
+
+        /* Images */
+        .project-image {
+            width: 60%;
+            border-radius: 8px;
+            margin-bottom: var(--vspace-1);
+            border: 1px solid var(--color-border);
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-text-light);
+            margin-top: -0.5rem;
+            margin-bottom: var(--vspace-1);
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 800px) {
+            .container {
+                width: 100%;
+                padding-left: 6vw;
+                padding-right: 6vw;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+            .nav-back {
+                position: static;
+                margin-bottom: var(--vspace-1);
+                display: inline-block;
+            }
+
+            h1 {
+                font-size: var(--text-xxl);
+            }
+
+            .project-title {
+                font-size: var(--text-lg);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .results-table {
+                font-size: var(--text-xs);
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 0.5rem;
+            }
+        }
+
+    /* Header Background Image */
+    .project-header {
+        position: relative;
+        z-index: 1;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        /* margin-top: calc(-1 * var(--vspace-1)); Extend to top */
+        padding-left: calc(50vw - 50%);
+        padding-right: calc(50vw - 50%);
+        padding-top: var(--vspace-4); /* Add top padding back to header */
+        overflow-x: hidden;
+    }
+
+    .project-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('./images/projects/project-1-banner.jpeg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.15;
+        z-index: -1;
+        overflow-x: hidden;
+    }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="nav-back">← Back to Portfolio</a>
+
+    <div class="container">
+        <header class="project-header">
+            <h1 class="project-title">STRUCTURAL AND THERMAL INTEGRITY ANALYSIS OF CVD REACTOR SUBASSEMBLIES</h1>
+            <p class="project-subtitle">MICROELECTRONICS PACKAGING | PARAMETRIC FATIGUE OPTIMIZATION</p>
+            <div class="project-meta">
+                <span class="meta-item">TEAM LEAD: Jagrut Brahmbhatt</span>
+                <span class="meta-item">ORGANIZATION: Larsen and Toubro Heavy Engineering</span>
+                <span class="meta-item">STANDARDS APPLIED: ASME Section VIII Div. 1 (2021), WRC 107/297, IS 1893:2015</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Project Overview -->
+            <section class="section">
+                <h2 class="section-title">
+                    PROJECT OVERVIEW
+                </h2>
+                <div class="card">
+                    <p>As a Senior Design Engineer, I led the design verification and integrity assessment of multiple critical subassemblies within a Chemical Vapor Deposition (CVD) reactor, deployed in a polysilicon manufacturing plant. The assemblies included the Bell Jar, Baseplate, Jacketed Shell, Nozzles, and Spool Pipes. Due to the reactor’s complex and non-standard geometry, traditional code-based design was insufficient, necessitating advanced Finite Element Analysis (FEA).</p>
+                </div>
+            </section>
+
+            <!-- Technical Approach -->
+            <section class="section">
+                <h2 class="section-title">
+                    SUBASSEMBLIES ANALYZED AND KEY DELIVERABLES:
+                </h2>
+                
+                <div class="column" style="margin-bottom: 25px;">
+                   <div class="row">
+                        <div class="card" style="height: 100%;">
+                            <ol>
+                                <li>Bell Jar Assembly (MDR-41201-02)
+                                    <ul>
+                                        <li>Objective: Validate structural integrity under internal/external pressure and complex support conditions.</li>
+                                        <li>FEA Setup:
+                                            <ul>
+                                                <li>Meshing: Hex-dominant mesh with local refinement at nozzles and junctions.</li>
+                                                <li>Boundary Conditions: Fixed support at base ring; remote displacement for symmetrical constraints.</li>
+                                                <li>Loading: Included design pressure (internal: 10 bar, external: FV), bolt preload, gravity, and nozzle loads.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Highlights:
+                                            <ul>
+                                                <li>Performed stress linearization at 10+ critical sections to verify primary membrane and bending stresses.</li>
+                                                <li>Buckling analysis confirmed safety margins >1.5 under external pressure loading.</li>
+                                                <li>Seismic loads applied based on IS 1893 Part 4, showing structural stability in modal and response spectrum analysis.</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Baseplate and Coverplate (MDR-41201-03)
+                                    <ul>
+                                        <li>Challenge: Complex cut-outs and load paths with no standard ASME provisions.</li>
+                                        <li>Approach: FEA-based thickness and junction analysis. Verified weld strength, reinforcement adequacy, and stiffness.</li>
+                                        <li>Notable Detail: Nozzles intersect both plates, requiring load mapping from flanged connections into the shell.</li>
+                                        <li>Boundary Conditions: Fixed base with bolt preload + self-weight + internal pressure distribution.</li>
+                                    </ul>
+                                </li>
+                                <li>Full Reactor Seismic Assessment (MDR-41201-08)
+                                    <ul>
+                                        <li>Scope: Evaluate the complete assembly under seismic events.</li>
+                                        <li>FEA Approach:
+                                            <ul>
+                                                <li>Combined structural model included Bell Jar, Jacket, Nozzles, Lifting Lugs, and Support Lugs.</li>
+                                                <li>Modal analysis identified fundamental frequencies to avoid resonance.</li>
+                                                <li>Loading: Seismic acceleration from IS 1893, bolt pretension, and nozzle weights included.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Constraints: Baseplate anchored; lateral and vertical constraints applied for realism.</li>
+                                    </ul>
+                                </li>
+                                <li>Jacketed Shell & Nozzle Systems (MDR-41201-01, MDR-41201-06)
+                                    <ul>
+                                        <li>Analysis: Multi-nozzle verification for both internal/external pressure.</li>
+                                        <li>Complexities:
+                                            <ul>
+                                                <li>Jacketed flanges, pad flanges, and spiral stiffeners not defined in ASME – modeled and validated via FEA.</li>
+                                                <li>WRC 107/297 and WRC 537 used to validate local stress zones.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Boundary Conditions: Pressure applied to shell/jacket cavities, supports modeled via elastic constraints, bolt connections simulated with pretension forces.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+            
+                        </div>
+                    </div>
+                   
+                </div>     
+            </section>
+
+
+            <section class="section">
+                <h2 class="section-title">
+                    DESIGN CHALLENGES AND RESOLUTIONS:
+                </h2>
+                <div class="row">
+                    <div class="column">
+                        <div class="card"><h2 class="section-title">Challenge 1</h2>Geometry not covered by code
+                        Many components (e.g., stub flanges, spiral baffled jackets) had geometries outside ASME Sec. VIII Div. 1. These required justification via FEA under U-2(g) clause.
+                        </div>
+                        <div class="card"><h2 class="section-title">Challenge 2</h2> Combined Loading Conditions
+                        Certain parts like Nozzle A and H had to endure multiple simultaneous loads: internal/external pressure, flange bolt loads, and seismic inertia. These were resolved through nonlinear FEA simulations.
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="card"><h2 class="section-title">Challenge 3</h2>Thermal/Pressure Load Coupling
+                        Considered gasket behavior, heat expansion mismatch between jacket and shell, and impact of thermal gradients, especially near nozzle junctions.
+                        </div>
+                        <div class="card" ><h2 class="section-title">Challenge 4</h2> Buckling and Deformation in Thin Sections
+                        Used eigenvalue buckling analysis to validate the safety margins of large-diameter sections under external pressure.
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Impact -->
+
+
+            <section class="section">
+                <h2 class="section-title">
+                    TOOLS & TECHNOLOGIES
+                </h2>
+                 <div class="card">
+                    <ul class="feature-list">
+                        <li>FEA Tools: ANSYS Workbench, HYPERMESH</li>
+                        <li>Design and Modelling: SolidWorks, PV Elite</li>
+                        <li>Calculations and Documentation: MathCAD, Excel, Word</li>
+                    </ul> 
+                </div>
+            </section>
+
+
+
+            <!-- Future Work -->
+            <section class="section">
+                <h2 class="section-title">
+                    IMPACT & FUTURE SCOPE
+                </h2>
+                <div class="card">
+                    <ul class="feature-list">
+                        <li>Delivered fully certified MDRs for each subassembly, including ASME code compliance and client-specific design basis documentation.</li>
+                        <li>Supported the commissioning of one of India’s first integrated polysilicon production reactors.</li>
+                        <li>Design successfully passed third-party audits (Worley, Reliance) and field hydrotesting without modifications.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.card, .section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Table hover effects
+        document.querySelectorAll('.results-table tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(234, 190, 124, 0.1)';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+    </script>
+</body>
+</html>
