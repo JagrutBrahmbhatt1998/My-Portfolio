@@ -3657,7 +3657,7 @@ img.u-pull-left {
 .folio-list {
     --item-min-height : var(--vspace-4_5);
     list-style        : none;
-    margin-top        : var(--vspace-4);
+    margin-top        : var(--vspace-2);
     margin-bottom     : var(--vspace-1);
     margin-left       : 0;
 }
