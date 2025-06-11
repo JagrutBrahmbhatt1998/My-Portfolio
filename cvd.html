@@ -392,36 +392,43 @@
                 
                 <div class="column" style="margin-bottom: 25px;">
                    <div class="row">
-                        <div class="card" style="height: 100%;">
-                            <ol>
-                                <li>Bell Jar Assembly (MDR-41201-02)
-                                    <ul>
-                                        <li>Objective: Validate structural integrity under internal/external pressure and complex support conditions.</li>
-                                        <li>FEA Setup:
+                        <div class="card" style="width: 100%;">
+                            <h2 class="section-title">Bell Jar Assembly</h2>
+                                
+                                            <h4>Objective:</h4>
                                             <ul>
-                                                <li>Meshing: Hex-dominant mesh with local refinement at nozzles and junctions.</li>
-                                                <li>Boundary Conditions: Fixed support at base ring; remote displacement for symmetrical constraints.</li>
-                                                <li>Loading: Included design pressure (internal: 10 bar, external: FV), bolt preload, gravity, and nozzle loads.</li>
+                                                <li>Validate structural integrity under internal/external pressure and complex support conditions.</li>
                                             </ul>
-                                        </li>
-                                        <li>Highlights:
-                                            <ul>
-                                                <li>Performed stress linearization at 10+ critical sections to verify primary membrane and bending stresses.</li>
-                                                <li>Buckling analysis confirmed safety margins >1.5 under external pressure loading.</li>
-                                                <li>Seismic loads applied based on IS 1893 Part 4, showing structural stability in modal and response spectrum analysis.</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>Baseplate and Coverplate (MDR-41201-03)
+                                            <h4>FEA Setup:</h4>
+                                           
+                                                <ul>
+                                                    <li>Meshing: Hex-dominant mesh with local refinement at nozzles and junctions.</li>
+                                                    <li>Boundary Conditions: Fixed support at base ring; remote displacement for symmetrical constraints.</li>
+                                                    <li>Loading: Included design pressure (internal: 10 bar, external: FV), bolt preload, gravity, and nozzle loads.</li>
+                                                </ul>
+                                           
+                                             <h4>Highlights:</h4>
+                                            
+                                                <ul>
+                                                    <li>Performed stress linearization at 10+ critical sections to verify primary membrane and bending stresses.</li>
+                                                    <li>Buckling analysis confirmed safety margins >1.5 under external pressure loading.</li>
+                                                    <li>Seismic loads applied based on IS 1893 Part 4, showing structural stability in modal and response spectrum analysis.</li>
+                                                </ul>
+                                         
+                            
+                        </div>
+                        <div class="card" style="width: 100%;">
+                            <h4>Baseplate and Coverplate </h4>
                                     <ul>
                                         <li>Challenge: Complex cut-outs and load paths with no standard ASME provisions.</li>
                                         <li>Approach: FEA-based thickness and junction analysis. Verified weld strength, reinforcement adequacy, and stiffness.</li>
                                         <li>Notable Detail: Nozzles intersect both plates, requiring load mapping from flanged connections into the shell.</li>
                                         <li>Boundary Conditions: Fixed base with bolt preload + self-weight + internal pressure distribution.</li>
                                     </ul>
-                                </li>
-                                <li>Full Reactor Seismic Assessment (MDR-41201-08)
+                                
+                        </div>
+                        <div class="card" style="width: 100%;">
+                             <h4>Full Reactor Seismic Assessment</h4>
                                     <ul>
                                         <li>Scope: Evaluate the complete assembly under seismic events.</li>
                                         <li>FEA Approach:
@@ -433,8 +440,12 @@
                                         </li>
                                         <li>Constraints: Baseplate anchored; lateral and vertical constraints applied for realism.</li>
                                     </ul>
-                                </li>
-                                <li>Jacketed Shell & Nozzle Systems (MDR-41201-01, MDR-41201-06)
+                                
+                        </div>
+                        <div class="card" style="height: 100%;">
+                                <h4>
+                                    Jacketed Shell & Nozzle Systems
+                                </h4> 
                                     <ul>
                                         <li>Analysis: Multi-nozzle verification for both internal/external pressure.</li>
                                         <li>Complexities:
@@ -445,8 +456,8 @@
                                         </li>
                                         <li>Boundary Conditions: Pressure applied to shell/jacket cavities, supports modeled via elastic constraints, bolt connections simulated with pretension forces.</li>
                                     </ul>
-                                </li>
-                            </ol>
+                                
+                            
             
                         </div>
                     </div>
@@ -472,7 +483,7 @@
                         <div class="card"><h2 class="section-title">Challenge 3</h2>Thermal/Pressure Load Coupling
                         Considered gasket behavior, heat expansion mismatch between jacket and shell, and impact of thermal gradients, especially near nozzle junctions.
                         </div>
-                        <div class="card" ><h2 class="section-title">Challenge 4</h2> Buckling and Deformation in Thin Sections
+                        <div class="card" style="height: 48%;"><h2 class="section-title">Challenge 4</h2> Buckling and Deformation in Thin Sections
                         Used eigenvalue buckling analysis to validate the safety margins of large-diameter sections under external pressure.
                         </div>
                     </div>
